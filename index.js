@@ -11,7 +11,7 @@ function checkIsLegalToDrink(person){
     if(person.age < 18)
     {
         let diffrence = 18 - person.age;
-        console.log(`napisz niestety brakuje ci jeszcze ${diffrence} lat`)
+        console.log(`niestety brakuje ci jeszcze ${diffrence} lat`)
     }
 }
 console.log("basia")
@@ -20,3 +20,59 @@ console.log("ania")
 checkIsLegalToDrink(ania);
 console.log("maciek")
 checkIsLegalToDrink(maciek);
+
+function changeElementByPerson(person){
+    //document.getElementById("person").innerText
+    if(person.age >= 18)   {
+        let element = document.getElementById("person");
+        element.innerText ="legalne"
+    } 
+    if(person.age < 18)   {
+        let element = document.getElementById("person");
+        let diffrence = 18 - person.age;
+        element.innerText =`niestety brakuje ci jeszcze ${diffrence} lat`
+    } 
+}
+
+document.getElementById("maciek").onclick = () => {
+    changeElementByPerson(maciek)
+}
+document.getElementById("ania").onclick = () => {
+    changeElementByPerson(ania)
+}
+document.getElementById("basia").onclick = () => {
+    changeElementByPerson(basia)
+}
+document.getElementById("check").onclick = () => {
+    let input = document.getElementById("wiek");
+    let rawValue = input.value;
+    let wiek = parseInt(rawValue);
+    if(isNaN(wiek)){
+        let element = document.getElementById("person");
+        element.classList.add("error")
+        element.innerText = `Błędna wartość w polu sprawdź wiek '${rawValue}' nie jest prawidłowym wiekiem`
+        return;
+    }
+    if(wiek < 0)
+    {let element = document.getElementById("person");
+        element.classList.add("error")
+        element.innerText = `Błędna wartość w polu sprawdź wiek '${rawValue}' jest ujemna`
+        return;
+
+
+    }
+    if(wiek >= 18){
+        let element = document.getElementById("person");
+        element.classList.remove("error")
+        element.innerText = "legalne"
+        return;
+    }
+    if(wiek < 18){
+        let element = document.getElementById("person");
+        let diffrence = 18 - wiek;
+        element.classList.remove("error")
+        element.innerText =`niestety brakuje ci jeszcze ${diffrence} lat` 
+        return;
+
+    }
+}
